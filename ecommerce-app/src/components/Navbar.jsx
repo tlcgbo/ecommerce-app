@@ -1,39 +1,55 @@
 import React from "react";
+import { ShoppingBasket } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { signOut } from "firebase/auth";
 
-function Navbar() {
+
+function Navbar({ handleSignOut, isAuth }) {
+  const [active, setActive] = useState("Home");
+
+    
+
   return (
-    <nav className="bg-black text-white px-6 py-3 flex items-center justify-between">
+    <nav className="bg-black text-white px-6 py-4 flex flex-wrap items-center justify-between">
       {/* Left Section */}
-      <div className="flex items-center space-x-6">
-        <a href="#" className="hover:text-gray-300">New</a>
+      <div className="flex items-center space-x-4 text-sm font-medium">
+        <Link to="/" className="hover:text-gray-300">Home</Link>
         <a href="#" className="hover:text-gray-300">Men</a>
         <a href="#" className="hover:text-gray-300">Women</a>
-        <a href="#" className="hover:text-gray-300">Kids</a>
         <a href="#" className="hover:text-gray-300">Shoes</a>
-        <a href="#" className="hover:text-gray-300">Curry</a>
-        <a href="#" className="hover:text-gray-300">Outlet</a>
+        
       </div>
 
       {/* Middle Section (Search Bar) */}
-      <div className="flex-grow mx-6">
+      <div className="w-full sm:w-auto flex-grow max-w-md mt-3 sm:mt-0">
         <input
           type="text"
           placeholder="Search UA"
-          className="w-full px-4 py-2 rounded bg-gray-800 text-white focus:outline-none"
+          className="w-full px-4 py-2 rounded-md bg-gray-800 text-white text-sm focus:outline-none"
         />
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center space-x-4">
-        <a href="#" className="hover:text-gray-300">Need Help?</a>
-        <a href="#" className="hover:text-gray-300">US</a>
-        <a href="#" className="hover:text-gray-300">English</a>
-        <button className="border px-3 py-1 rounded">Register</button>
-        <button className="border px-3 py-1 rounded">Log In</button>
+      <div className="flex items-center space-x-4 text-sm font-medium mt-3 sm:mt-0">
+        {!isAuth ? (
+          <>
+            <Link to="/signup" className="border border-gray-500 px-4 py-2 rounded-md hover:bg-gray-700">Signup</Link>
+        <Link to="/login" className="border border-gray-500 px-4 py-2 rounded-md hover:bg-gray-700">Login</Link>
         <button className="relative">
-          <span className="material-icons">shopping_cart</span>
-          <span className="absolute -top-1 -right-2 bg-red-600 text-xs px-1 rounded-full">1</span>
+          <ShoppingBasket className="text-2xl" />
+          <span className="absolute -top-1 -right-2 bg-red-600 text-xs px-2 rounded-full">
+            1
+          </span>
         </button>
+          </>
+        ) : (
+          <>
+            <Link to="/cart" className="border border-gray-500 px-4 py-2 rounded-md hover:bg-gray-700">Cart</Link>
+            <button onClick={handleSignOut} className="border border-gray-500 px-4 py-2 rounded-md hover:bg-red-700">Sign Out</button>
+          </>
+        )}
+        
       </div>
     </nav>
   );
