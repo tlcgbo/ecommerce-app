@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify'
 import { useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase-config'
+import Products from './components/Products'
 
 function App() {
     const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
@@ -55,7 +56,8 @@ function App() {
         <Route path='/' element={<Home isAuth={isAuth} />} />
         <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
         <Route path='/cart' element={<Cart setIsAuth={setIsAuth} />} />
-        <Route path='signup' element={<SignUp setIsAuth={setIsAuth} />} />
+        <Route path='/signup' element={<SignUp setIsAuth={setIsAuth} />} />
+        <Route path='/products' element={<Products setIsAuth={setIsAuth} />} />
       </Routes>
     </Router>
   )

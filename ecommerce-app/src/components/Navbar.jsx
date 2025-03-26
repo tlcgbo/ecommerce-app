@@ -15,7 +15,7 @@ function Navbar({ handleSignOut, isAuth }) {
       {/* Left Section */}
       <div className="flex items-center space-x-4 text-sm font-medium">
         <Link to="/" className="hover:text-gray-300">Home</Link>
-        <a href="#" className="hover:text-gray-300">Men</a>
+        <a href="#" className="hover:text-gray-300">Mens</a>
         <a href="#" className="hover:text-gray-300">Women</a>
         <a href="#" className="hover:text-gray-300">Shoes</a>
         
@@ -46,6 +46,8 @@ function Navbar({ handleSignOut, isAuth }) {
         ) : (
           <>
             <Link to="/cart" className="border border-gray-500 px-4 py-2 rounded-md hover:bg-gray-700">Cart</Link>
+            <Link to="/products" className="hover:text-gray-300">Products</Link>
+
             <button onClick={handleSignOut} className="border border-gray-500 px-4 py-2 rounded-md hover:bg-red-700">Sign Out</button>
           </>
         )}
