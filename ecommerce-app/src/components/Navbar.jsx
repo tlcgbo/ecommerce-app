@@ -30,6 +30,9 @@ function Navbar({ handleSignOut, isAuth }) {
         />
       </div>
 
+
+     
+
       {/* Right Section */}
       <div className="flex items-center space-x-4 text-sm font-medium mt-3 sm:mt-0">
         {!isAuth ? (
