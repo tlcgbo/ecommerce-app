@@ -13,16 +13,15 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase-config'
 import Products from './components/Products'
 
+
 function App() {
     const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
 
-    // const signUserOut = () => {
-    //   signOut(auth).then(() => {
-    //     localStorage.clear();
-    //     setIsAuth(false);
-    //     window.location.pathname = "/login";
-    //   });
-    // };
+    const [cart, setCart] = useState([]);
+
+    const addToCart = (product) => {
+      setCart((prevCart) => [...prevCart, product]); // Add product to cart
+    };
 
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,6 +44,11 @@ function App() {
           console.error("Error signing out:", error.message);
         });
     };
+
+    const deleteItem = (index) => {
+      const updatedCart = cart.filter((_, i) => i !== index);
+      setCart(updatedCart);
+    };
   
 
   return (
@@ -55,11 +59,16 @@ function App() {
       <Routes>
         <Route path='/' element={<Home isAuth={isAuth} />} />
         <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
-        <Route path='/cart' element={<Cart setIsAuth={setIsAuth} />} />
+        <Route path='/cart' element={<Cart cart={cart} deleteItem={deleteItem} setIsAuth={setIsAuth} />} />
         <Route path='/signup' element={<SignUp setIsAuth={setIsAuth} />} />
-        <Route path='/products' element={<Products setIsAuth={setIsAuth} />} />
+        <Route path='/products' element={<Products addToCart={addToCart} setIsAuth={setIsAuth} />} />
       </Routes>
+
+    
+
     </Router>
+
+    
   )
 }
 

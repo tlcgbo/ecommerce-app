@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-function Products() {
+function Products({ addToCart }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
-  
+
   const products = [
     { id: 1, name: "Men's Shoes", category: "men", price: "$100", image: "https://www.mytheresa.com/media/1094/1238/100/e7/P00362116.jpg" },
     { id: 2, name: "Women's Shoes", category: "women", price: "$120", image: "https://www.hbshoes.co.uk/images/hb-shoes-morgan-p603-5699_image.jpg" },
@@ -18,7 +18,6 @@ function Products() {
 
   return (
     <div className="p-6 text-white bg-black min-h-screen">
-      {/* Search and Filter */}
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
         <input
           type="text"
@@ -38,7 +37,6 @@ function Products() {
         </select>
       </div>
 
-      {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
@@ -46,7 +44,12 @@ function Products() {
               <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded-md mb-4" />
               <h2 className="text-lg font-semibold">{product.name}</h2>
               <p className="text-gray-400">{product.price}</p>
-              <button className="mt-2 px-4 py-2 bg-red-600 hover:bg-red-500 rounded-md transition-colors">Add to Cart</button>
+              <button 
+                className="mt-2 px-4 py-2 bg-red-600 hover:bg-red-500 rounded-md transition-colors"
+                onClick={() => addToCart(product)} // Add to Cart
+              >
+                Add to Cart
+              </button>
             </div>
           ))
         ) : (

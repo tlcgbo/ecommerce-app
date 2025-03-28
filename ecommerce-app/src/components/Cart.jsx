@@ -1,37 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Cart() {
+function Cart({ cart = [], deleteItem }) { // Ensure cart is always an array
   return (
-    <div className="bg-white text-black px-12 py-8 flex justify-between">
-      {/* Left Section (Cart Items & Shipping) */}
-      <div className="w-2/3">
-        <h2 className="text-2xl font-semibold mb-4">Your Bag (1 Item)</h2>
+    <div className="bg-white text-black px-12 py-8">
+      <h2 className="text-2xl font-semibold mb-4">Your Bag ({cart.length} Items)</h2>
 
-        {/* Shipping Section */}
-        <div className="border-b pb-4">
-          <h3 className="text-lg font-semibold mb-2">Shipping</h3>
-          <div className="flex items-start space-x-4">
-          
-            {/* Product Details */}
-            <div className="flex flex-col justify-between">
-              <p className="font-medium">Women's UA Tech™ Twist ½ Zip</p>
-              <p className="text-gray-500 text-sm">Color: Black / Metallic Silver</p>
-              <p className="text-gray-500 text-sm">Size: XS</p>
-              <p className="font-semibold mt-2">$45.00</p>
+      {cart.length > 0 ? (
+        cart.map((item, index) => (
+          <div key={index} className="border-b pb-4 mb-4 flex items-center justify-between">
+            <div className="flex items-center">
+              <img src={item.image} alt={item.name} className="w-20 h-20 object-cover mr-4" />
+              <div>
+                <p className="font-medium">{item.name}</p>
+                <p className="text-gray-500">{item.price}</p>
+              </div>
             </div>
+            <button
+              onClick={() => deleteItem(index)}
+              className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600"
+            >
+              Delete
+            </button>
           </div>
-
-          {/* Shipping Options */}
-          <div className="mt-4 flex items-center space-x-4 text-sm">
-            <input type="radio" checked className="accent-black" />
-            <label>Ship To An Address</label>
-            <input type="radio" className="accent-black" />
-            <label>Pick Up In Store</label>
-          </div>
-        </div>
-      </div>
-
-     
+        ))
+      ) : (
+        <p className="text-gray-500">Your cart is empty.</p>
+      )}
     </div>
   );
 }
