@@ -50,7 +50,7 @@ function Navbar({ handleSignOut, isAuth }) {
           <>
             <Link to="/cart" className="border border-gray-500 px-4 py-2 rounded-md hover:bg-gray-700">Cart</Link>
             <Link to="/products" className="hover:text-gray-300">Products</Link>
-
+            
             <button onClick={handleSignOut} className="border border-gray-500 px-4 py-2 rounded-md hover:bg-red-700">Sign Out</button>
           </>
         )}

@@ -56,6 +56,8 @@ function Products({ addToCart }) {
           <p className="text-gray-400 col-span-full text-center">No products found</p>
         )}
       </div>
+
+      
     </div>
   );
 }
