@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { db } from "../firebase-config"; // Firebase config file
+import { collection, addDoc } from "firebase/firestore";
 
 function Checkout({ cart }) {
   const navigate = useNavigate();
@@ -16,9 +18,28 @@ function Checkout({ cart }) {
 
   const totalPrice = cart.reduce((acc, item) => acc + parseFloat(item.price.replace("$", "")), 0);
 
-  const handleOrder = () => {
-    alert("Order placed successfully!");
-    navigate("/"); // Redirect to home after placing order
+  const handleOrder = async () => {
+    try {
+      // Create an order object with the user and cart information
+      const orderData = {
+        userInfo,
+        cart,
+        totalPrice: totalPrice.toFixed(2),
+        createdAt: new Date(),
+      };
+
+      // Save the order to Firestore
+      await addDoc(collection(db, "orders"), orderData);
+
+      // Notify the user that the order was placed
+      alert("Order placed successfully!");
+
+      // Redirect to home after placing order
+      navigate("/");
+    } catch (error) {
+      console.error("Error placing order: ", error);
+      alert("There was an error processing your order. Please try again.");
+    }
   };
 
   return (
@@ -38,6 +59,9 @@ function Checkout({ cart }) {
             ))}
             <div className="mt-4 font-semibold">Total: ${totalPrice.toFixed(2)}</div>
           </div>
+
+
+          
 
           {/* Checkout Form */}
           <div className="mb-6">

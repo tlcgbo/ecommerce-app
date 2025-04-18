@@ -6,7 +6,7 @@ function Products({ addToCart }) {
 
   const products = [
     { id: 1, name: "Men's Shoes", category: "men", price: "$100", image: "https://www.mytheresa.com/media/1094/1238/100/e7/P00362116.jpg" },
-    { id: 2, name: "Women's Shoes", category: "women", price: "$120", image: "https://www.hbshoes.co.uk/images/hb-shoes-morgan-p603-5699_image.jpg" },
+    { id: 2, name: "Women's Shoes", category: "women", price: "$120", image: "https://images.lululemon.com/is/image/lululemon/LW9FS1S_032102_1?size=400,400" },
     { id: 3, name: "Men's Jacket", category: "men", price: "$80", image: "https://thecollegestore.co.uk/cdn/shop/products/RhodesTrust_Men_sPufferJacketBlack.jpg?v=1604259640" },
     { id: 4, name: "Women's Jacket", category: "women", price: "$90", image: "https://static.cimalp.fr/33824-large_default/sleeveless-puffer-jacket.jpg" },
   ];
