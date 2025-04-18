@@ -27,7 +27,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <div className="flex flex-col items-center justify-center text-center py-40 px-6">
+      <div className="flex flex-col items-center justify-center text-center py-20 px-6">
         <h1 className="text-4xl sm:text-5xl font-extrabold">
           Welcome to Our Store
         </h1>
@@ -42,23 +42,41 @@ function Home() {
       </div>
 
       {/* Order History Section */}
-      <div className="px-6 pb-12">
-        <h2 className="text-2xl font-bold mb-4">Previous Orders</h2>
+      <div className="px-6 pb-12 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">
+          Previous Orders
+        </h2>
         {orders.length === 0 ? (
-          <p>No orders placed yet.</p>
+          <p className="text-gray-400">No orders placed yet.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {orders.map((order) => (
-              <div key={order.id} className="bg-gray-900 p-4 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold mb-2">Order by {order.userInfo.name}</h3>
-                <p className="text-sm mb-2">Shipping to: {order.userInfo.address}</p>
-                <p className="text-sm mb-2">Payment: {order.userInfo.paymentMethod}</p>
-                <ul className="mb-2 text-sm list-disc list-inside">
-                  {order.cart.map((item, idx) => (
-                    <li key={idx}>{item.name} - {item.price}</li>
-                  ))}
-                </ul>
-                <p className="font-semibold">Total: ${order.totalPrice}</p>
+              <div
+                key={order.id}
+                className="bg-gray-800 border border-gray-700 p-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300"
+              >
+                <h3 className="text-xl font-semibold mb-2">
+                  {order.userInfo.name}
+                </h3>
+                <p className="text-sm text-gray-300 mb-1">
+                  <strong>Address:</strong> {order.userInfo.address}
+                </p>
+                <p className="text-sm text-gray-300 mb-3">
+                  <strong>Payment:</strong> {order.userInfo.paymentMethod}
+                </p>
+                <div className="mb-3">
+                  <h4 className="font-medium mb-1">Items:</h4>
+                  <ul className="list-disc list-inside text-sm text-gray-200 space-y-1">
+                    {order.cart.map((item, idx) => (
+                      <li key={idx}>
+                        {item.name} - {item.price}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <p className="font-bold text-lg text-green-400">
+                  Total: ${order.totalPrice}
+                </p>
               </div>
             ))}
           </div>
