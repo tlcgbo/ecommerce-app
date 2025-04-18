@@ -1,16 +1,16 @@
+// SignUp.js
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';  
+import 'react-toastify/dist/ReactToastify.css';
 import GoogleBtn from "./GoogleBtn";
 
 const initialState = {
   username: "",
   email: "",
-  password: "",  
+  password: "",
   confirmPassword: "",
 };
 
@@ -45,14 +45,12 @@ const SignUp = ({ setIsAuth }) => {
       localStorage.setItem("isAuth", "true");
 
       if (typeof setIsAuth === "function") {
-        setIsAuth(true); 
+        setIsAuth(true);
       }
-      
+
       toast.success("Signup successful! Redirecting...");
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-      
+      navigate("/products"); // <-- updated route
+
       setFormData(initialState);
     } catch (error) {
       console.error(error);
@@ -151,6 +149,6 @@ const SignUp = ({ setIsAuth }) => {
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;

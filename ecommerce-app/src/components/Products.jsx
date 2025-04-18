@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Products({ addToCart }) {
   const [search, setSearch] = useState("");
@@ -18,6 +20,7 @@ function Products({ addToCart }) {
 
   return (
     <div className="p-6 text-white bg-black min-h-screen">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
         <input
           type="text"
@@ -46,7 +49,10 @@ function Products({ addToCart }) {
               <p className="text-gray-400">{product.price}</p>
               <button 
                 className="mt-2 px-4 py-2 bg-red-600 hover:bg-red-500 rounded-md transition-colors"
-                onClick={() => addToCart(product)} // Add to Cart
+                onClick={() => {
+                  addToCart(product);
+                  toast.success(`${product.name} added to cart!`);
+                }}
               >
                 Add to Cart
               </button>
@@ -56,8 +62,6 @@ function Products({ addToCart }) {
           <p className="text-gray-400 col-span-full text-center">No products found</p>
         )}
       </div>
-
-      
     </div>
   );
 }

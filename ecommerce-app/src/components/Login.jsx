@@ -1,15 +1,15 @@
+// Login.js
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
-import { useNavigate } from "react-router-dom";
 import GoogleBtn from "./GoogleBtn";
 import { toast, ToastContainer } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
-    email: "",
-    password: "",
+  email: "",
+  password: "",
 };
 
 const Login = ({ setIsAuth }) => {
@@ -21,13 +21,13 @@ const Login = ({ setIsAuth }) => {
     e.preventDefault();
 
     if (!email || !password) {
-        toast.error("Please fill in all fields.");
-        return;
+      toast.error("Please fill in all fields.");
+      return;
     }
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success("Login successful!"); // Make sure this toast triggers after success
+      toast.success("Login successful!");
       localStorage.setItem("isAuth", "true");
 
       if (typeof setIsAuth === "function") {
@@ -35,7 +35,7 @@ const Login = ({ setIsAuth }) => {
       }
 
       setFormData(initialState);
-      navigate("/"); // Redirect to the homepage or dashboard
+      navigate("/products"); // <-- updated route
     } catch (error) {
       console.error(error);
       switch (error.code) {
@@ -60,8 +60,7 @@ const Login = ({ setIsAuth }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white px-6">
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-
+      <ToastContainer position="top-right" autoClose={5000} />
       <div className="w-full max-w-md bg-gray-900 p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -95,7 +94,6 @@ const Login = ({ setIsAuth }) => {
           >
             Log In
           </button>
-
           <div className="mt-4">
             <GoogleBtn setIsAuth={setIsAuth} />
           </div>
