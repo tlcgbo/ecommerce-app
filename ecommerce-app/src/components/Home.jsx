@@ -29,10 +29,10 @@ function Home() {
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-center text-center py-20 px-6">
         <h1 className="text-4xl sm:text-5xl font-extrabold">
-          Welcome to Our Store
+          Style Rush ⚡
         </h1>
         <p className="mt-4 text-lg max-w-xl">
-          Discover amazing products at unbeatable prices!
+        Where Fashion Meets Simplicity
         </p>
         <Link to="/signup">
           <button className="mt-6 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 transition">
